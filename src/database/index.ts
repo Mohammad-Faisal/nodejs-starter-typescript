@@ -1,6 +1,5 @@
 
 import config from '../config/index';
-
 import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {UserInfo} from "../server/user/model";

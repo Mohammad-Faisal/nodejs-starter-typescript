@@ -6,6 +6,6 @@ content-type: application/json
 
 {
     "name" : "user3" ,
-    "age" : "24" ,
+    "age" : "2sdf" ,
     "email": "mohammadfaisal1011@gmail.com"
 }

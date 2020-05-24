@@ -1,26 +1,29 @@
-import { UserRepository } from "./repository";
 import { UserService } from "./service";
-const db = require('../../database');
+import * as express from 'express';
+import Requests from './schema';
+let validate = require('../../middlewares/SchemaValidator');
 
+export default class UserController {
 
-// export class UserController {
+    public userService = new UserService();
+    public router = express.Router();
 
-//     private userService : UserService;
+    constructor() {
+        this.intializeRoutes();
+    }
 
-//     constructor() {
-//         this.userService = new UserService();
-//     }
-// }
+    public intializeRoutes() {
+        this.router.route('/createUser').post(validate(Requests.createUser) ,this.createUser);
+        this.router.route('/getUsers').get(this.getAllUsers);
+    }
 
-module.exports =  {
-
-    createUser : async (req, res , next) => {
-        const response = await new UserService().createNewUser(req.body);
+    createUser = async (req, res, next) => {
+        const response = await this.userService.createNewUser(req.body);
         res.json(response);
-    },
+    }
 
-    getAllUsers: async (req , res , next) => {
-        const allUsers = await new UserService().getAllUsers(req.body);
+    getAllUsers = async (req, res, next) => {
+        const allUsers = await this.userService.getAllUsers(req.body);
         res.json(allUsers);
     }
 

@@ -3,6 +3,7 @@ dotenv.config();
 
 export default {
     applicationPort: process.env.PORT,
+    dbType: process.env.DB_TYPE,
     dbURL: process.env.DB_URL,
     dbPort: process.env.DB_PORT ,
     dbName: process.env.DB_NAME ,
