@@ -2,6 +2,7 @@ import express from "express";
 import logger from 'morgan';
 import "reflect-metadata";
 import * as bodyParser from 'body-parser';
+import errorMiddleware from './middlewares/ErrorHandler';
 
 export default class App {
 
@@ -29,12 +30,7 @@ export default class App {
     }
 
     private handleError(): void {
-        this.app.use(function (err, req, res, next) {
-            res.status(err.status || 500);
-            res.json({
-                message: err.message
-            })
-        })
+        this.app.use(errorMiddleware)
     }
 
     public listen() {
@@ -42,6 +38,7 @@ export default class App {
             console.log(`App listening on the port ${this.port}`);
         });
     }
+    
 }
 
 

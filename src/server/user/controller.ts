@@ -1,6 +1,8 @@
 import { UserService } from "./service";
 import * as express from 'express';
 import Requests from './schema';
+import { SuccessResponse } from "../../models/SuccessResponse";
+import ValidationExceptions from "../../constants/ValidationExceptions";
 let validate = require('../../middlewares/SchemaValidator');
 
 export default class UserController {
@@ -18,13 +20,15 @@ export default class UserController {
     }
 
     createUser = async (req, res, next) => {
-        const response = await this.userService.createNewUser(req.body);
-        res.json(response);
+        const userInfo = await this.userService.createNewUser(req.body);
+        
+        res.json(new SuccessResponse(userInfo.getValue()));
     }
 
     getAllUsers = async (req, res, next) => {
         const allUsers = await this.userService.getAllUsers(req.body);
-        res.json(allUsers);
+        if(allUsers.isFailure)next(allUsers.error);
+        else res.json(new SuccessResponse(allUsers.getValue()));
     }
 
 }
