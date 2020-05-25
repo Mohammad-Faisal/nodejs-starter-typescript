@@ -3,14 +3,21 @@ import * as express from 'express';
 import Requests from './schema';
 import { SuccessResponse } from "../../models/SuccessResponse";
 import ValidationExceptions from "../../constants/ValidationExceptions";
+import { IUserService } from "./iservice";
+import { inject, injectable } from "inversify";
+import TYPES from "../../injector/file.types";
+import DIContainer from "../../injector/inversify.config";
 let validate = require('../../middlewares/SchemaValidator');
 
+@injectable()
 export default class UserController {
 
-    public userService = new UserService();
+    public userService : IUserService;
     public router = express.Router();
 
-    constructor() {
+    //@inject(TYPES.IUserService) userService : IUserService 
+    constructor( ) {
+        this.userService = DIContainer.get<IUserService>(TYPES.IUserService);
         this.intializeRoutes();
     }
 

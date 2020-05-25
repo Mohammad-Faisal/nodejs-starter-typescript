@@ -1,9 +1,10 @@
 import { IUserService } from "./iservice";
 import { Request } from "express";
-import { BaseResponse } from "../../models/BaseResponse";
 import { UserRepository } from "./repository";
 import { Result } from "../../models/Result";
+import { injectable } from "inversify";
 
+@injectable()
 export class UserService implements IUserService {
 
 

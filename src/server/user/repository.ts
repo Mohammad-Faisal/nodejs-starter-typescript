@@ -15,7 +15,8 @@ export class UserRepository {
 
     public saveUser = async (userModel) => {
         const response = await this.repository.save(userModel);
-        return response;
+        if(!response) Result.failure(ValidationExceptions.USER_ALREADY_REGISTERED);
+        return Result.succesful(response);
     }
 
     public getAllUsers = async () => {

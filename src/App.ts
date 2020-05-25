@@ -3,15 +3,19 @@ import logger from 'morgan';
 import "reflect-metadata";
 import * as bodyParser from 'body-parser';
 import errorMiddleware from './middlewares/ErrorHandler';
+import DIContainer from './injector/inversify.config';
+import { InversifyExpressServer, interfaces, TYPE } from "inversify-express-utils";
+
 
 export default class App {
 
     public app: express.Application;
-    public port?: number;
+    public port: number = 3001;
 
     constructor(controllers) {
+        
         this.app = express();
-        this.port = 3001;
+
         this.setRequestPreProcessors();
         this.initializeControllers(controllers);
         this.handleError();

@@ -1,5 +1,8 @@
 import Joi from'joi';
 import _ from 'lodash';
+import { ErrorResponse } from '../models/ErrorResponse';
+import { ErrorCodes } from '../constants/ErrorCodes';
+import CustomError from '../models/CustomError';
 
 module.exports = (validationSchema) => {
 
@@ -41,17 +44,10 @@ module.exports = (validationSchema) => {
                             }
                         };
 
-                        // Custom Error
-                        const CustomError = {
-                            status: 'failed',
-                            error: 'Invalid request data. Please review request and try again.'
-                        };
 
-                       
-                        res.status(422).json(JoiError);
+                        next(new CustomError(ErrorCodes.REQUEST_VALIDATION_ERROR ,err.message.replace(/['"]/g, '')))
 
                     } else {
-                        // Replace req.body with the data after Joi validation
                         req.body = data;
                         next();
                     }
