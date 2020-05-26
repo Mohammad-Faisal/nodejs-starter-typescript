@@ -1,6 +1,6 @@
-import { UserService } from "./service";
 import * as express from 'express';
 import Requests from './schema';
+import "reflect-metadata";
 import { SuccessResponse } from "../../models/SuccessResponse";
 import ValidationExceptions from "../../constants/ValidationExceptions";
 import { IUserService } from "./iservice";
@@ -16,7 +16,7 @@ export default class UserController {
     public router = express.Router();
 
     //@inject(TYPES.IUserService) userService : IUserService 
-    constructor( ) {
+    constructor() {
         this.userService = DIContainer.get<IUserService>(TYPES.IUserService);
         this.intializeRoutes();
     }

@@ -2,6 +2,7 @@ import {Container} from 'inversify';
 import { UserService } from '../server/user/service';
 import TYPES from './file.types';
 import { IUserService } from '../server/user/iservice';
+import "reflect-metadata";
 
 
 var DIContainer = new Container();

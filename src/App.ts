@@ -3,8 +3,6 @@ import logger from 'morgan';
 import "reflect-metadata";
 import * as bodyParser from 'body-parser';
 import errorMiddleware from './middlewares/ErrorHandler';
-import DIContainer from './injector/inversify.config';
-//import { InversifyExpressServer, interfaces, TYPE } from "inversify-express-utils";
 
 
 export default class App {
@@ -22,6 +20,7 @@ export default class App {
     }
 
     private initializeControllers(controllers) {
+
         controllers.forEach((controller) => {
             this.app.use('/api/v1', controller.router);
         });
