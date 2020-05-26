@@ -4,7 +4,7 @@ import "reflect-metadata";
 import * as bodyParser from 'body-parser';
 import errorMiddleware from './middlewares/ErrorHandler';
 import DIContainer from './injector/inversify.config';
-import { InversifyExpressServer, interfaces, TYPE } from "inversify-express-utils";
+//import { InversifyExpressServer, interfaces, TYPE } from "inversify-express-utils";
 
 
 export default class App {
