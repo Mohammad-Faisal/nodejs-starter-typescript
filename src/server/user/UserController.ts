@@ -1,5 +1,5 @@
 import { Controller, UseBefore, QueryParams, JsonController, Param, Body, Get, Post, Put, Delete, Res, NotFoundError, Req, BodyParam } from "routing-controllers";
-import { IUserService } from "./iservice";
+import { IUserService } from "./IUserService";
 import { Request, Response } from 'express';
 import TYPES from "../../injector/file.types";
 import DIContainer from "../../injector/inversify.config";
@@ -21,7 +21,7 @@ export default class UserController {
 
   @Post("/createUser/")
   async createUser(@Body({ required: true }) createUserRequest: CreateUserRequest, @Res() response: Response) {
-    console.log(createUserRequest);
+    console.log(createUserRequest );
     const userInfo = await this.userService.createNewUser(createUserRequest);
     return response.json(new SuccessResponse(userInfo.getValue()));
   }

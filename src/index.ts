@@ -1,22 +1,25 @@
-
-// import app from './App';
-// const port = 3001;
-
-// app.listen(3001 , () => {
-    
-//     return console.log(`server is listening on ${port}`);
-// })
-
-
 import App from './App';
 
 
 import config from './config/index';
 import "reflect-metadata";
 import {createConnection} from "typeorm";
-import {UserInfo} from "./server/user/model";
+import {UserInfo} from "./server/user/models/UserInfo";
 
 
+console.log({
+    type: "postgres",
+    host: config.dbURL,
+    port:  5432,
+    username: config.dbUserName,
+    password: config.dbPassword,
+    database: config.dbName,
+    entities: [
+        UserInfo
+    ],
+    synchronize: true,
+    logging: false
+})
 
 createConnection({
     type: "postgres",

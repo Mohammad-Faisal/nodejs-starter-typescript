@@ -1,4 +1,4 @@
-import { IUserService } from "./iservice";
+import { IUserService } from "./IUserService";
 import { Request } from "express";
 import { UserRepository } from "./UserRepository";
 import { Result } from "../../models/Result";
@@ -13,11 +13,9 @@ export class UserService implements IUserService {
     protected repository = new UserRepository();
 
     createNewUser = async (createUserRequest: CreateUserRequest): Promise<Result> => {
-
         const userWithName = await this.repository.findUserById(createUserRequest.name);
         if(userWithName) throw new NotAcceptableError('User with this name already exists');
-        const result = await this.repository.saveUser(createUserRequest);
-        return result;
+        return await this.repository.saveUser(createUserRequest);
     }
 
     getAllUsers = async (): Promise<Result> => {

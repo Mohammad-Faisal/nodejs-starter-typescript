@@ -1,9 +1,7 @@
-import {Request, Response} from "express";
 import {getManager, Repository} from "typeorm";
-import {UserInfo} from "./model";
+import {UserInfo} from "./models/UserInfo";
 import { Result } from "../../models/Result";
-import ValidationExceptions from "../../constants/ValidationExceptions";
-import CustomError from "../../models/CustomError";
+import ValidationExceptions from "../../constants/RuntimExceptions";
 
 
 export class UserRepository {
@@ -16,7 +14,6 @@ export class UserRepository {
 
     public saveUser = async (userModel) => {
         const response = await this.repository.save(userModel);
-        if(!response) Result.failure(ValidationExceptions.USER_ALREADY_REGISTERED);
         return Result.succesful(response);
     }
 

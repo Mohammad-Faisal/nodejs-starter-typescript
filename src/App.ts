@@ -6,6 +6,7 @@ import { createExpressServer, useExpressServer } from "routing-controllers";
 import UserController from "./server/user/UserController";
 import { CustomErrorHandler } from "./middlewares/CustomErrorHandler";
 import "reflect-metadata";
+// import { IncomingRequestValidator } from "./middlewares/IncomingRequestValidator";
 
 
 export default class App {
@@ -15,47 +16,24 @@ export default class App {
 
     constructor() {
 
-        // this.app = express()
-        
+         this.app = express()
+         this.app.use(logger('dev'))
 
-       
-
-        // this.app.use(bodyParser.json());
-        // this.app.use(bodyParser.urlencoded({ extended: true }))
-
-        // useExpressServer(this.app, {
-        //     routePrefix: "/api/v1",
-        //     defaultErrorHandler: false,
-        //     middlewares: [CustomErrorHandler],
-        //     controllers: [UserController]
-
-        //     // controllerDirs: [__dirname + "/controller/**/*.controller.js"],
-        //     // middlewareDirs: [__dirname + "/middleware/**/*.middleware.js"],
-        //     // interceptorDirs: [__dirname + "/interceptor/**/*.interceptor.js"]
-        // });
-
-
-        this.app = createExpressServer({
+        useExpressServer(this.app, {
             routePrefix: "/api/v1",
             defaultErrorHandler: false,
+            classTransformer: true ,
+            validation : {skipMissingProperties : true},
+            // validation : true,
             controllers: [UserController] ,
-            middlewares: [CustomErrorHandler],
-             // we specify controllers we want to use
+            middlewares: [  CustomErrorHandler],
+            // controllerDirs: [__dirname + "/controller/**/*.controller.js"],
+            // middlewareDirs: [__dirname + "/middleware/**/*.middleware.js"],
+            // interceptorDirs: [__dirname + "/interceptor/**/*.interceptor.js"]
         });
 
-        //this.setRequestPreProcessors();
-        //this.setRequestPreProcessors();
-        //this.initializeControllers(controllers);
-        //this.handleError();
     }
 
-
-
-    private setRequestPreProcessors() {
-        this.app.use(bodyParser.json());
-        this.app.use(bodyParser.urlencoded({ extended: true }))
-        this.app.use(logger('dev'));
-    }
 
     public listen() {
         this.app.listen(this.port, () => {
