@@ -9,7 +9,6 @@
 
 
 import App from './App';
-import UserController from './server/user/controller';
 
 
 import config from './config/index';
@@ -17,12 +16,6 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import {UserInfo} from "./server/user/model";
 
-
-const app = new App(
-  [
-    new UserController(),
-  ]
-);
 
 
 createConnection({
@@ -39,6 +32,8 @@ createConnection({
     logging: false
 }).then(connection => {
     console.log('a new connection is created')
+    const app = new App();
+    
     app.listen();
 }).catch(error => console.log(error));
 

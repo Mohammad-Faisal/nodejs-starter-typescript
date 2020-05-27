@@ -8,32 +8,26 @@ import CustomError from "../../models/CustomError";
 
 export class UserRepository {
 
-    private repository : Repository< any> ;
+    private repository : Repository<any> ;
 
     constructor() {
         this.repository = getManager().getRepository(UserInfo)
     }
 
     public saveUser = async (userModel) => {
-        // const response = await this.repository.save(userModel);
-        // if(!response) Result.failure(ValidationExceptions.USER_ALREADY_REGISTERED);
-        // return Result.succesful(response);
-
-        return await this.repository.save(userModel)
-         .then(response => {
-            return Result.succesful(response);
-         })
-         .catch(error => {
-            return Result.failure(new CustomError(450 , error.message));
-         })
-          
-    }
-
-    
-
-    public getAllUsers = async () => {
-        const response = await this.repository.find();
+        const response = await this.repository.save(userModel);
         if(!response) Result.failure(ValidationExceptions.USER_ALREADY_REGISTERED);
         return Result.succesful(response);
     }
+
+    public findUserById = async(name : string) => {
+        const userObject = await this.repository.findOne({ where: { name: name } })
+        return userObject;
+    }
+
+    public getAllUsers = async () => {
+        const response = await this.repository.find();
+        return Result.succesful(response);
+    }
+
 }
