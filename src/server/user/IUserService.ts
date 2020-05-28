@@ -2,7 +2,6 @@ import { Result } from "../../models/Result";
 import CreateUserRequest from "./models/CreateUserRequest";
 import { Service } from "typedi";
 
-@Service()
 export interface IUserService {
 
     createNewUser: (request: CreateUserRequest) => Promise<Result>;
