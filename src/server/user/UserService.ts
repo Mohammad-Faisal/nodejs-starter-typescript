@@ -2,11 +2,12 @@ import { IUserService } from "./IUserService";
 import { Request } from "express";
 import { UserRepository } from "./UserRepository";
 import { Result } from "../../models/Result";
-import { injectable } from "inversify";
 import {Controller, Param, Body, Get, Post, Put, Delete  ,Res, NotFoundError, NotAcceptableError} from "routing-controllers";
 import CreateUserRequest from "./models/CreateUserRequest";
+import {Service, Container} from "typedi";
 
-@injectable()
+
+@Service()
 export class UserService implements IUserService {
 
 

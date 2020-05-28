@@ -1,16 +1,16 @@
 import { Controller, UseBefore, QueryParams, JsonController, Param, Body, Get, Post, Put, Delete, Res, NotFoundError, Req, BodyParam } from "routing-controllers";
 import { IUserService } from "./IUserService";
 import { Request, Response } from 'express';
-import TYPES from "../../injector/file.types";
-import DIContainer from "../../injector/inversify.config";
 import { SuccessResponse } from "../../models/SuccessResponse";
 import CreateUserRequest from "./models/CreateUserRequest";
 import "reflect-metadata";
-
+import {Service, Container, Inject} from "typedi";
+import { UserService } from "./UserService";
 @JsonController()
 export default class UserController {
 
-  public userService: IUserService = DIContainer.get<IUserService>(TYPES.IUserService);
+ 
+  public userService: IUserService = Container.get(UserService);
 
 
   @Get("/getUsers/")
