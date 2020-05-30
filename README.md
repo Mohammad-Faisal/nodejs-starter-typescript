@@ -1,6 +1,7 @@
 # to see all docker images
 sudo docker images
 
+
 # to see the status of docker images
 sudo docker build -t 56faisal/typescript-starter .
 
