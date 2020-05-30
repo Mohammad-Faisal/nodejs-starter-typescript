@@ -5,6 +5,7 @@
     "containerDefinitions": [
         {
             "name": "typescript-starter",
+            "memory" : "256" ,
             "image": "012986887692.dkr.ecr.us-east-1.amazonaws.com/typescript-starter:latest",
             "portMappings": [
                 {
