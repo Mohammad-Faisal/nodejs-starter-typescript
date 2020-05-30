@@ -18,3 +18,6 @@ docker push 56faisal/typescript-starter:tagname
 sudo docker run -p 8888:3001 56faisal/typescript-starter
 
 # here 8888 is the port open to the world and 3001 is the port in which our application is running
+
+
+
