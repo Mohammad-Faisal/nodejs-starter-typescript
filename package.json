@@ -26,7 +26,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "class-transformer": "^0.2.3",
-    "class-validator": "^0.12.2",
+    "class-validator": "^0.14.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "install": "^0.13.0",
